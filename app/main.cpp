@@ -16,6 +16,8 @@
 #include "example.h"
 #include "vector.hh"
 #include "matrix.hh"
+#include "figure.hh"
+#include "doubl.hh"
 #include "../include/lacze_do_gnuplota.hh"
 
 /*!
@@ -23,7 +25,7 @@
  * CMake definitions (here the version number) from source code.
  * 
  * EDIT: dodane kreowanie wektorow i macierzy plus obsluga lacza do gnuplota
- */
+ *///
 
 #define DL_KROTKI_BOK  100
 #define DL_DLUGI_BOK   150
@@ -131,6 +133,31 @@ int main() {
   double argumentsM[][SIZE] = {{1.0, 2.0},{3.0, 4.0}};
   Matrix tmpM2 = Matrix(argumentsM);
   std::cout << "Matrix - konstruktor parametryczny:\n" << tmpM2 << std::endl;
+
+  Matrix matt;
+  Vector vecc;
+  Figure rectan;
+  //double r;
+  double am=2;
+  double args[2] = {1, 2};
+  vecc = Vector(args);
+  matt.make(90);
+  std::cout << matt<< std::endl;
+  vecc=multiply(matt, vecc, am);
+  std::cout << vecc << std::endl;
+
+  double arg1[]={1,1}; double arg2[]={1,3}; double arg3[]={2,3}; double arg4[]={2,1};
+  Vector vec1=Vector(arg1); Vector vec2=Vector(arg2); Vector vec3=Vector(arg3); Vector vec4=Vector(arg4); Vector vec5=Vector(arg1);
+  Vector ar[]={vec1,vec2,vec3,vec4,vec5};
+  rectan = Figure(ar);
+
+  rectan=rectan.length(rectan);
+  std::cout << rectan;
+
+  //r=vec1&vec2;
+  //std::cout << r << std::endl;
+
+
 
     PzG::LaczeDoGNUPlota  Lacze;  // Ta zmienna jest potrzebna do wizualizacji
                                 // rysunku prostokata

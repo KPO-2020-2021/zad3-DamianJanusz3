@@ -18,7 +18,7 @@
  *
  * Niniejsza przestrzeń nazw stanowi moduł logiczny zawierający
  * narzędzia umożliwiające realizację połączenia z programem \p gnuplot.
- */
+ *///
 namespace PzG {
 
   /*!

@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * This is a dummy class to demonstrate features of the boiler plate.
+ * /This is a dummy class to demonstrate features of the boiler plate.
  */
 class Dummy {
 	public:
