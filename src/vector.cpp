@@ -1,10 +1,11 @@
 #include "size.hh"
 #include "vector.hh"
-//#include "matrix.hh"
-//#include <math.h>
+
 #include <iomanip>
 #include <iostream>
 #include <cstdlib>
+
+#define MIN_DIFF 0.00001
 
 
 /******************************************************************************
@@ -121,8 +122,9 @@ Vector Vector::operator / (const double &tmp) {
  */
 const double &Vector::operator [] (int index) const {
     if (index < 0 || index >= SIZE) {
-        std::cerr << "Error: Wektor jest poza zasiegiem!" << std::endl;
-    } // lepiej byłoby rzucić wyjątkiem stdexcept
+        //std::cerr << "Error: Wektor jest poza zasiegiem!" << std::endl;
+        throw std::runtime_error("Wektor jest poza zasiegiem!");
+    } 
     return size[index];
 }
 
@@ -147,7 +149,7 @@ double &Vector::operator[](int index) {
  */
 std::ostream &operator << (std::ostream &out, Vector const &tmp) {
     for (int i = 0; i < SIZE; ++i) {
-        out << "[ " << std::setw(16) << std::fixed << std::setprecision(10) << tmp[i] << " ]";//\n
+        out << std::setw(16) << std::fixed << std::setprecision(10) << tmp[i];//\n
     }
     return out;
 }
@@ -167,13 +169,40 @@ std::istream &operator >> (std::istream &in, Vector &tmp) {
     return in;
 }
 
+/******************************************************************************
+ |  Przeciazenie operatora &                                                 |
+ |  wylicza długość między punktami
+ |  Argumenty:                                                                |
+ |      v- wektor posiadający współrzędne do których liczymy długość            |
+ |  Zwraca:                                                             |
+ |  długość między danymi punktami
+ */
 // jest to tylko dla przestrzeni 2d czyli SIZE=2
 double Vector::operator & (const Vector &v) const {
     double result;
-    //for (int i=0; i<SIZE-1; ++i){
-    result= abs(sqrt(pow(this->size[0] - v.size[0], 2) + pow(this->size[1] - v.size[1], 2)));
-    //}
+    
+    result= sqrt(pow(this->size[0] - v.size[0], 2) + pow(this->size[1] - v.size[1], 2));
+    
     return result;
 }
 
-//wynik.dl1=abs(sqrt(pow(this->tabp[0].tabv[0] - this->tabp[1].tabv[0], 2) + pow(this->tabp[0].tabv[1] - this->tabp[1].tabv[1], 2)));
+
+/******************************************************************************
+ |  Przeciążenie operatora ==                |
+ |  Argumenty:                                                                |
+ |      m - zmienna typu vector         |
+ |  Zwraca:                                                                   |
+ |      true jeśli wpółrzędne takie same                               |
+    false w przeciwnym wypadku
+ */
+bool  Vector::operator == ( const Vector &m) const {
+
+for (int i=0; i<SIZE; ++i) { 
+if (abs(this->size[0] - m.size[0]) <= MIN_DIFF && abs(this->size[1] - m.size[1]) <= MIN_DIFF ) 
+    return true;
+
+  else
+    return false;
+}
+return true;
+}

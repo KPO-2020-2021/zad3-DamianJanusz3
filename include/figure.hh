@@ -1,6 +1,7 @@
 #pragma once
 
 #include "size.hh"
+#include "matrix.hh"
 #include "vector.hh"
 #include <iostream>
 #include <cstdlib>
@@ -29,17 +30,19 @@ public:
 
     double &operator[](int index);
 
+    bool  operator == ( Figure m);
+
+    Figure move ( Vector move1);
+
+    Figure rotate (Matrix m , int amount);
+
+    void showlength (Figure rectangle, std::ostream& strmo) const;
+
+    void read( std::istream& strmi, std::ostream& strmo);
 
 
-    //Vector operator * (Vector tmp);           // Operator mnożenia przez wektor
 
-    //Matrix operator + (Matrix tmp);
-
-    //double  &operator () (unsigned int row, unsigned int column);
     
-    //const double &operator () (unsigned int row, unsigned int column) const;
-
-    //void make (double alfa);
 
     
 };

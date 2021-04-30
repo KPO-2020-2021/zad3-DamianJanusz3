@@ -31,6 +31,8 @@ public:
 
     double operator & (const Vector &v) const;
 
+    bool  operator == ( const Vector &m) const;
+
 };
 
 std::ostream &operator << (std::ostream &out, Vector const &tmp);

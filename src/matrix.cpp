@@ -1,11 +1,11 @@
 #include "size.hh"
-//#include "vector.hh"
+
 #include "matrix.hh"
-//#include <math.h>
+
 #include <iomanip>
 #include <iostream>
 #include <cstdlib>
-//using namespace std;
+
 
  
 
@@ -95,13 +95,15 @@ Matrix::Matrix(double tmp[SIZE][SIZE]) {
 double &Matrix::operator()(unsigned int row, unsigned int column) {
 
     if (row >= SIZE) {
-        std::cout << "Error: Macierz jest poza zasiegiem"; 
-        exit(0); // lepiej byłoby rzucić wyjątkiem stdexcept
+        //std::cout << "Error: Macierz jest poza zasiegiem"; 
+        throw std::runtime_error("Macierz jest poza zasiegiem");
+        exit(0); 
     }
 
     if (column >= SIZE) {
-        std::cout << "Error: Macierz jest poza zasiegiem";
-        exit(0); // lepiej byłoby rzucić wyjątkiem stdexcept
+        //std::cout << "Error: Macierz jest poza zasiegiem";
+        throw std::runtime_error("Macierz jest poza zasiegiem");
+        exit(0); 
     }
 
     return value[row][column];
@@ -119,13 +121,15 @@ double &Matrix::operator()(unsigned int row, unsigned int column) {
 const double &Matrix::operator () (unsigned int row, unsigned int column) const {
 
     if (row >= SIZE) {
-        std::cout << "Error: Macierz jest poza zasiegiem";
-        exit(0); // lepiej byłoby rzucić wyjątkiem stdexcept
+        //std::cout << "Error: Macierz jest poza zasiegiem";
+        throw std::runtime_error("Macierz jest poza zasiegiem");
+        exit(0); 
     }
 
     if (column >= SIZE) {
-        std::cout << "Error: Macierz jest poza zasiegiem";
-        exit(0); // lepiej byłoby rzucić wyjątkiem stdexcept
+        //std::cout << "Error: Macierz jest poza zasiegiem";
+        throw std::runtime_error("Macierz jest poza zasiegiem");
+        exit(0); 
     }
 
     return value[row][column];
@@ -147,24 +151,7 @@ std::istream &operator>>(std::istream &in, Matrix &mat) {
     }
     return in;
 }
-/******************************************************************************
- |  Realizuje mnozenie macierzy przez wektor.                                 |
- |  Argumenty:                                                                |
- |      this - macierz, czyli pierwszy skladnik mnozenia,                     |
- |      v - wektor, czyli drugi skladnik mnozenia.                            |
- |  Zwraca:                                                                   |
- |      Iloczyn dwoch skladnikow przekazanych jako wektor.                    |
- */
 
-/*Vector Matrix::operator * (Vector tmp) {
-    Vector result;
-    for (int i = 0; i < SIZE; ++i) {
-        for (int j = 0; j < SIZE; ++j) {
-            result[i] += value[i][j] * tmp[j];
-        }
-    }
-    return result;
-}*/
 
 /******************************************************************************
  |  Przeciazenie operatora <<                                                 |
@@ -175,7 +162,7 @@ std::istream &operator>>(std::istream &in, Matrix &mat) {
 std::ostream &operator<<(std::ostream &out, const Matrix &mat) {
     for (int i = 0; i < SIZE; ++i) {
         for (int j = 0; j < SIZE; ++j) {
-            out << "| " << std::setw(16) << std::fixed << std::setprecision(10) << mat(i, j) << " | "; //warto ustalic szerokosc wyswietlania dokladnosci liczb
+            out << std::setw(16) << std::fixed << std::setprecision(10) << mat(i, j); 
         }
         std::cout << std::endl;
     }
@@ -221,22 +208,3 @@ while (k < amount) {
     return v;
 }
 
-/*void Matrix::make (double alfa) {
-    double alfainrad = alfa * M_PI /180;
-    this->value[0][0]= cos( alfainrad);
-    this->value[0][1]=(-1)*( sin( alfainrad));
-    this->value[1][0]= sin( alfainrad);
-    this->value[1][1]= cos( alfainrad);
- 
-}
-
-Vector multiply (Matrix m, Vector v, double amount ) {
-Vector result;
-int i=0;
-while (i < amount) {
-    result=m * v;
-
-    i++;
-}
-    return result;
-}*/
