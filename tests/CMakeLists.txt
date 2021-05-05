@@ -5,7 +5,7 @@ set(TESTFILES        # All .cpp files in tests/
     main.cpp
     dummy.cpp
     vector.cpp
-    matrix.cpp
+    #matrix.cpp
     figure.cpp
 )
 

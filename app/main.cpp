@@ -119,7 +119,27 @@ PzG::LaczeDoGNUPlota  Lacze;  // Ta zmienna jest potrzebna do wizualizacji
   Vector vec1=Vector(arg1); Vector vec2=Vector(arg2); Vector vec3=Vector(arg3); Vector vec4=Vector(arg4); Vector vec5=Vector(arg1);
   Vector ar[]={vec1,vec2,vec3,vec4,vec5};
   rectan = Figure(ar);
+
+
+
+
+
+
+
+
   
+ double args[3][3]={{1,2,5},{2,3,6},{7,8,9}}; double args2[3][3]={{1,2,2},{1,2,2},{1,2,2}};
+  Matrix m( args); Matrix p(args2); Matrix r;
+r=multiply(m,p,1);
+std::cout<< r;
+
+  Vector v;
+  int n=2;
+  v=m.gaussdet(n);
+std::cout <<v<< std::endl;
+
+
+
 //wczytanie prostokąta z cin
   rectan.read(std::cin, std::cout);
 

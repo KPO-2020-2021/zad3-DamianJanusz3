@@ -28,10 +28,14 @@ public:
 
     void make (double alfa);
 
+    Vector gaussdet (int n);
+
+    Matrix operator * (Matrix m);
+
     
 };
 
-Vector multiply (Matrix m, Vector v, double amount );
+Matrix multiply (Matrix m, Matrix v, double amount );
 
 std::istream &operator>>(std::istream &in, Matrix &mat);
 

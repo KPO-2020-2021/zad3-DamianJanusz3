@@ -10,6 +10,49 @@
  
 
 
+Vector Matrix::gaussdet (int n) {
+/* Applying Gauss Elimination */
+Vector x;
+int i,j,k;
+double ratio;
+
+
+
+	 for(i=1;i<=n-1;++i)
+	 {
+		  if(this->value[i][i] == 0.0)
+		  {
+			   //std::cout<<"Mathematical Error!";
+               throw std::runtime_error("0 na glownej przekatnej");
+			   //exit(0);
+		  }
+		  for(j=i+1;j<=n;j++)
+		  {
+			   ratio = this->value[j][i]/this->value[i][i];
+
+			   for(k=1;k<=n+1;k++)
+			   {
+			  		this->value[j][k] = this->value[j][k] - ratio*this->value[i][k];
+			   }
+		  }
+	 }
+     //return *this;
+	 /* Obtaining Solution by Back Substitution Method */
+	 x[n] = this->value[n][n+1]/this->value[n][n];
+
+	 for(i=n-1;i>=1;i--)
+	 {
+		  x[i] = this->value[i][n+1];
+		  for(j=i+1;j<=n;j++)
+		  {
+		  		x[i] = x[i] - this->value[i][j]*x[j];
+		  }
+		  x[i] = x[i]/this->value[i][i];
+	 }
+return x;
+}
+
+
  /******************************************************************************
  |  Realizuje mnozenie macierzy przez wektor.                                 |
  |  Argumenty:                                                                |
@@ -31,12 +74,12 @@ Vector Matrix::operator * (Vector tmp) {
 
 
 /******************************************************************************
- |  Przeciążenie dodawania macierzy                                                          |
+ |  Przeciążenie dodawania macierzy                                           |
  |  Argumenty:                                                                |
- |      this - macierz, czyli pierwszy skladnik dodawania,                     |
- |      tmp - macierz, czyli drugi skladnik dodawania.                                               |
+ |      this - macierz, czyli pierwszy skladnik dodawania,                    |
+ |      tmp - macierz, czyli drugi skladnik dodawania.                        |
  |  Zwraca:                                                                   |
- |      Macierz - iloczyn dwóch podanych macierzy.                  |
+ |      Macierz - iloczyn dwóch podanych macierzy.                            |
  */
 Matrix Matrix::operator + (Matrix tmp) {
     Matrix result;
@@ -183,8 +226,8 @@ void Matrix::make (double alfa) {
     this->value[0][0]= cos( alfainrad);
     this->value[0][1]=(-1)*( sin( alfainrad));
     this->value[1][0]= sin( alfainrad);
-    this->value[1][1]= cos( alfainrad);
- 
+    this->value[1][1]= cos( alfainrad);   
+    
 }
 
 
@@ -197,14 +240,26 @@ void Matrix::make (double alfa) {
  |  Zwraca:                                                                   |
  |      wektor v po obrocie wokół środka układu współrzędnych.                |
  */
-Vector multiply (Matrix m, Vector v, double amount ) {
+Matrix multiply (Matrix m, Matrix v,  double amount ) {
 
 int k=0;
+Matrix result;
 while (k < amount) {
-    v =m * v;
-
+    result=m*v;
     ++k;
 }
-    return v;
+    return result;
 }
 
+
+
+
+Matrix Matrix::operator * (Matrix m) {
+Matrix result;
+for (int i = 0; i < SIZE; ++i) {
+        for (int j = 0; j < SIZE; ++j) {
+    result.value[i][j]=this->value[i][j]*m.value[i][j];
+        }
+    }
+    return result;
+}
