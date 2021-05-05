@@ -127,7 +127,7 @@ PzG::LaczeDoGNUPlota  Lacze;  // Ta zmienna jest potrzebna do wizualizacji
 
 
 
-  
+  /***** część związana z mnożeniem macierzy i liczeniem wyznacznika*********
  double args[3][3]={{1,2,5},{2,3,6},{7,8,9}}; double args2[3][3]={{1,2,2},{1,2,2},{1,2,2}};
   Matrix m( args); Matrix p(args2); Matrix r;
 r=multiply(m,p,1);
@@ -137,7 +137,7 @@ std::cout<< r;
   int n=2;
   v=m.gaussdet(n);
 std::cout <<v<< std::endl;
-
+*/
 
 
 //wczytanie prostokąta z cin

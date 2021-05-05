@@ -2,6 +2,12 @@
 -kilka metod zrobionych jest "na sztywno", bez uogólnień bo zwyczajnie nie miałyby sensu w innych
 warunkach. Przykładem jest metoda showlength bez sensu gdyby było 5 boków
 -operator wyświetlania obsługuje wyświetlanie na cout i wpisywanie do pliku. Stąd przy wyświetlaniu wierzchołków w programie mamy ich 5
+
+
+NA POTRZEBY SPRAWDZENIA MODYFIKACJI I MNOŻENIA MACIERZY TRZEBA ZMIENIĆ "SIZE"  NP. NA WARTOŚĆ 3. 
+W TYM MOMENCIE CZĘŚĆ WYKONUJĄCA TE OPERACJE W PLIKU main.cpp JEST ZAKOMENTOWANA WIĘC TRZEBA TO ZMIENIĆ, PONADTO TRZEBA WYŁĄCZYĆ TESTY DLA MACIERZY BO POWODUJĄ WTEDY BŁĘDY
+
+
 ## Building
 
 Build by making a build directory (i.e. `build/`), run `cmake` in that dir, and then use `make` to build the desired target.
